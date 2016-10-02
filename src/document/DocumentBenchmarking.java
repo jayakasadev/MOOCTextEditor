@@ -1,5 +1,8 @@
 package document;
 
+import document.util.ScoreBasicThread;
+import document.util.ScoreEffThread;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
@@ -33,12 +36,13 @@ public class DocumentBenchmarking {
 		// THe number of characters to start with. 
 		// You can play around with this.
 		int start = 50000;
+
+        System.out.println("NumberOfChars\tBasicTime\tEfficientTime");
 		
 		// TODO: Fill in the rest of this method so that it runs two loops
 		// and prints out timing results as described in the assignment 
 		// instructions and following the pseudocode below.
-		for (int numToCheck = start; numToCheck < numSteps*increment + start; 
-				numToCheck += increment)
+		for (int numToCheck = start; numToCheck < numSteps*increment + start; numToCheck += increment)
 		{
 			// numToCheck holds the number of characters that you should read from the 
 			// file to create both a BasicDocument and an EfficientDocument.  
@@ -57,8 +61,24 @@ public class DocumentBenchmarking {
 			 *     b. Calls fleshScore on this document
 			 * 6. Print out the time it took to complete the loop in step 5 
 			 *      (on the same line as the first print statement) followed by a newline (\n) 
-			 */  
-			 
+			 */
+            String text = getStringFromFile(textfile, numToCheck);
+
+            ScoreBasicThread sbt = new ScoreBasicThread(text, trials);
+            ScoreEffThread set = new ScoreEffThread(text, trials);
+
+            Thread basic = new Thread(sbt);
+            Thread efficient = new Thread(set);
+            try {
+                basic.start();
+                efficient.start();
+                basic.join();
+                efficient.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            System.out.println(numToCheck + "\t\t\t" + (sbt.getTime()/1000.0) + " sec\t\t" + (set.getTime()/1000.0) +" sec");
 		}
 	
 	}
@@ -96,5 +116,4 @@ public class DocumentBenchmarking {
 		
 		return s.toString();
 	}
-	
 }
