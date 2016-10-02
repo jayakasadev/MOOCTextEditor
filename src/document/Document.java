@@ -40,7 +40,19 @@ public abstract class Document {
 		
 		return tokens;
 	}
-	
+
+	private List<String> splitSyllables(String word, String pattern){
+        ArrayList<String> tokens = new ArrayList<>();
+        Pattern tokSplitter = Pattern.compile(pattern);
+        Matcher m = tokSplitter.matcher(word);
+
+        while (m.find()) {
+            tokens.add(m.group());
+        }
+
+        return tokens;
+    }
+
 	/** This is a helper function that returns the number of syllables
 	 * in a word.  You should write this and use it in your 
 	 * BasicDocument class.
@@ -65,7 +77,16 @@ public abstract class Document {
 		// TODO: Implement this method so that you can call it from the 
 	    // getNumSyllables method in BasicDocument (module 1) and 
 	    // EfficientDocument (module 2).
-	    return 0;
+		List<String> tokens = splitSyllables(word, "[aeiouyAEIOUY]+");
+		List<String> loneEs = splitSyllables(word, "[^aeiouyAEIOUY]+[eE]\\b");
+		List<String> singleEs = splitSyllables(word, "\\b[^aeiouyAEIOUY]*[eE]\\b");
+		//Todo fix this regex
+		//List<String> remove = getTokens("\\b[a-zA-Z]+[e]\\b");
+		//List<String> exception = getTokens("\\b[a-zA-Z][e]\\b");
+        
+		return tokens.size() - loneEs.size() + singleEs.size();
+		//return tokens.size() - remove.size() + exception.size();
+	    //return 0;
 	}
 	
 	/** A method for testing
@@ -107,8 +128,7 @@ public abstract class Document {
 		}
 		return passed;
 	}
-	
-	
+
 	/** Return the number of words in this document */
 	public abstract int getNumWords();
 	
@@ -133,7 +153,4 @@ public abstract class Document {
 
 	    return 206.835 - 1.015 * (words / sentences) - 84.6 * (syllables / words);
 	}
-	
-	
-	
 }

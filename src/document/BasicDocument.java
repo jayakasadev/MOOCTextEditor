@@ -88,12 +88,19 @@ public class BasicDocument extends Document
 		// the helper function countSyllables in Document.java using a loop, 
 		// and then call it here on each word.
         //getting all the words first
-        List<String> tokens = getTokens("[aeiouyAEIOUY]+");
-        List<String> loneEs = getTokens("[^aeiouyAEIOUY]+[eE]\\b");
-        List<String> singleEs = getTokens("\\b[^aeiouyAEIOUY]*[eE]\\b");
+
+        //List<String> tokens = getTokens("[aeiouyAEIOUY]+");
+        //List<String> loneEs = getTokens("[^aeiouyAEIOUY]+[eE]\\b");
+        //List<String> singleEs = getTokens("\\b[^aeiouyAEIOUY]*[eE]\\b");
         //Todo fix this regex
         //List<String> remove = getTokens("\\b[a-zA-Z]+[e]\\b");
         //List<String> exception = getTokens("\\b[a-zA-Z][e]\\b");
+		int count = 0;
+		List<String> tokens = getTokens("[a-zA-Z]+");
+
+		for(String token : tokens){
+			count += countSyllables(token);
+		}
 
         /*
         System.out.println("\ntokens " + tokens.size());
@@ -124,8 +131,9 @@ public class BasicDocument extends Document
         }
         */
 
-        return tokens.size() - loneEs.size() + singleEs.size();
+        //return tokens.size() - loneEs.size() + singleEs.size();
         //return tokens.size() - remove.size() + exception.size();
+		return count;
 	}
 	
 	
