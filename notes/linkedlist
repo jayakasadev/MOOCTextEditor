@@ -1,0 +1,21 @@
+case 1: null
+head = null
+tail = null
+
+case 2: null
+add head
+head = new node(value)
+head.next = tail
+
+case 3: 1-> 3 -> 2 -> null
+remove 2
+get to 3
+get 2's child = null
+set 3's child to 2's child
+set 2's child's parent to 3
+1-> 3 -> null
+
+case 1: 1 -> 2 -> 3 -> null
+remove 1
+set head to 2
+set head's prev to null

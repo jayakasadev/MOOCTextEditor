@@ -51,8 +51,7 @@ public class MyLinkedListTester {
 	/*You should not need to add much to this method.
 	 * We provide it as an example of a thorough test. */
 	@Test
-	public void testGet()
-	{
+	public void testGet() {
 		//test empty list, get should throw an exception
 		try {
 			emptyList.get(0);
@@ -107,8 +106,12 @@ public class MyLinkedListTester {
 	 * We've included the example from the concept challenge.
 	 * You will want to add more tests.  */
 	@Test
-	public void testRemove()
-	{
+	public void testRemove() {
+		/*
+		for(int node : list1){
+			System.out.println(node);
+		}
+		*/
 		int a = list1.remove(0);
 		assertEquals("Remove: check a is correct ", 65, a);
 		assertEquals("Remove: check element 0 is correct ", (Integer)21, list1.get(0));
@@ -121,8 +124,7 @@ public class MyLinkedListTester {
 	 *  public boolean add(E element)
 	 * */
 	@Test
-	public void testAddEnd()
-	{
+	public void testAddEnd() {
         // TODO: implement this test
 		
 	}
@@ -130,9 +132,9 @@ public class MyLinkedListTester {
 	
 	/** Test the size of the list */
 	@Test
-	public void testSize()
-	{
+	public void testSize() {
 		// TODO: implement this test
+
 	}
 
 	
@@ -142,16 +144,14 @@ public class MyLinkedListTester {
 	 * public void add(int index, E element)
 	 * */
 	@Test
-	public void testAddAtIndex()
-	{
+	public void testAddAtIndex() {
         // TODO: implement this test
 		
 	}
 	
 	/** Test setting an element in the list */
 	@Test
-	public void testSet()
-	{
+	public void testSet() {
 	    // TODO: implement this test
 	    
 	}

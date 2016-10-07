@@ -27,18 +27,28 @@ public class MyLinkedList<E> extends AbstractList<E> {
 		// TODO: Implement this method
         if(head == null){
             head = new LLNode<E>(element);
-            head.setNext(tail);
-            return true;
+            head.next = tail;
+            tail = new LLNode<E>(null);
+            tail.prev = head;
         }
-        if(tail == null){
-            tail = new LLNode<E>(element);
-            return true;
+        else{
+            //adding at the end
+            //getting tail's parent
+            LLNode<E> prev = tail.prev;
+
+            //create new node to add
+            LLNode<E> node = new LLNode<E>(element);
+            //set child to tail
+            node.next = tail;
+            //set parent
+            node.prev = prev;
+
+            //set the tail's parent to new node
+            tail.prev = node;
+            //set child of parent node
+            prev.next = node;
         }
-        LLNode<E> node = tail;
-        while(node.getNext() != null){
-            node = node.getNext();
-        }
-        node.setNext(new LLNode<E>(element));
+        size++;
 		return true;
 	}
 
@@ -46,7 +56,15 @@ public class MyLinkedList<E> extends AbstractList<E> {
 	 * @throws IndexOutOfBoundsException if the index is out of bounds. */
 	public E get(int index) {
 		// TODO: Implement this method.
-		return null;
+        if(index >= size || index < 0){
+            throw new IndexOutOfBoundsException();
+        }
+        LLNode<E> temp = head;
+        while(index > 0){
+            temp = temp.next;
+            index--;
+        }
+		return temp.data;
 	}
 
 	/**
@@ -56,9 +74,22 @@ public class MyLinkedList<E> extends AbstractList<E> {
 	 */
 	public void add(int index, E element ) {
 		// TODO: Implement this method
+        if(index <= size && index >= 0){
+            LLNode<E> node = new LLNode<E>(element);
+            LLNode<E> temp = head;
+            while(index > 0){
+                temp = temp.next;
+                index--;
+            }
 
+            LLNode<E> prev= temp.prev;
+            node.next = temp;
+            node.prev = prev;
+
+            temp.prev = node;
+            prev.next = node;
+        }
 	}
-
 
 	/** Return the size of the list */
 	public int size() {
@@ -74,7 +105,40 @@ public class MyLinkedList<E> extends AbstractList<E> {
 	 */
 	public E remove(int index) {
 		// TODO: Implement this method
-		return null;
+        if(index >= size || index < 0){
+            throw new IndexOutOfBoundsException();
+        }
+        LLNode<E> temp = head;
+        E data = null;
+
+        if(index == 0){
+            data = head.data;
+            head = head.next;
+            head.prev = null;
+        }
+        else if(index == size-1){
+            data = tail.data;
+        }
+        else {
+            while(index > 1){
+                temp = temp.next;
+                index--;
+            }
+
+            LLNode<E> target = temp.next;
+            LLNode<E> child = target.next;
+
+            data = temp.data;
+
+            temp.next = child;
+            child.prev = temp;
+
+            target = null;
+        }
+
+        size--;
+
+		return data;
 	}
 
 	/**
@@ -86,42 +150,31 @@ public class MyLinkedList<E> extends AbstractList<E> {
 	 */
 	public E set(int index, E element) {
 		// TODO: Implement this method
-		return null;
+        if(index >= size || index < 0){
+            throw new IndexOutOfBoundsException();
+        }
+        LLNode<E> temp = head;
+
+        while(index > 0){
+            temp = temp.next;
+            index--;
+        }
+
+        temp.data = element;
+
+		return temp.data;
 	}   
 }
 
 class LLNode<E> {
-	private LLNode<E> prev;
-	private LLNode<E> next;
-	private E data;
+	LLNode<E> prev;
+	LLNode<E> next;
+	E data;
 
 	// TODO: Add any other methods you think are useful here
 	// E.g. you might want to add another constructor
 
-	public LLNode(E e) 
-	{
+	public LLNode(E e) {
 		this.data = e;
-		this.prev = null;
-		this.next = null;
 	}
-
-	public LLNode<E> getPrev(){
-        return prev;
-    }
-
-    public LLNode<E> getNext(){
-        return next;
-    }
-
-    public void setPrev(LLNode<E> prev){
-        this.prev = prev;
-    }
-
-    public void setNext(LLNode<E> next){
-        this.next = next;
-    }
-
-    public E getData(){
-        return data;
-    }
 }
