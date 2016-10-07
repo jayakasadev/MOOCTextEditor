@@ -99,8 +99,6 @@ public class MyLinkedListTester {
 		catch (IndexOutOfBoundsException e) {
 		}
 
-
-		
 	}
 	
 	
@@ -177,6 +175,22 @@ public class MyLinkedListTester {
         longerList.set(LONG_LIST_LENGTH-1, 888);
         assertEquals("Size: check longerlist's size is correct ", LONG_LIST_LENGTH, longerList.size());
         assertEquals("Data: check longerlist's data is correct ", new Integer(888), longerList.get(LONG_LIST_LENGTH-1));
+
+        try{
+            longerList.set(-1, 888);
+            fail("Boundary Test: adding before the head");
+        }
+        catch (Exception e){
+
+        }
+
+        try{
+            longerList.set(LONG_LIST_LENGTH, 888);
+            fail("Boundary Test: adding before the head");
+        }
+        catch (Exception e){
+
+        }
 	}
 	
 	
