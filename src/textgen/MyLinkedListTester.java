@@ -16,7 +16,7 @@ import org.junit.Test;
  */
 public class MyLinkedListTester {
 
-	private static final int LONG_LIST_LENGTH =10; 
+	private static final int LONG_LIST_LENGTH =100;
 
 	MyLinkedList<String> shortList;
 	MyLinkedList<Integer> emptyList;
@@ -98,6 +98,8 @@ public class MyLinkedListTester {
 		}
 		catch (IndexOutOfBoundsException e) {
 		}
+
+
 		
 	}
 	
@@ -126,7 +128,10 @@ public class MyLinkedListTester {
 	@Test
 	public void testAddEnd() {
         // TODO: implement this test
-		
+        longerList.add(101);
+        int size = LONG_LIST_LENGTH + 1;
+        assertEquals("Size: check longerlist's size is correct ", size, longerList.size());
+        assertEquals("Data: check longerlist's data is correct ", new Integer(101), longerList.get(size-1));
 	}
 
 	
@@ -134,7 +139,9 @@ public class MyLinkedListTester {
 	@Test
 	public void testSize() {
 		// TODO: implement this test
-
+        assertEquals("Size: check longerlist's size is correct ", LONG_LIST_LENGTH, longerList.size());
+        assertEquals("Size: check emptylist's size is correct ", 0, emptyList.size());
+        assertEquals("Size: check shortlist's size is correct ", 2, shortList.size());
 	}
 
 	
@@ -146,14 +153,30 @@ public class MyLinkedListTester {
 	@Test
 	public void testAddAtIndex() {
         // TODO: implement this test
-		
+		longerList.add(LONG_LIST_LENGTH, 102);
+        int size = 1 + LONG_LIST_LENGTH;
+        assertEquals("Size: check longerlist's size is correct ", size, longerList.size());
+        assertEquals("Data: check longerlist's data is correct ", new Integer(102), longerList.get(size-1));
+
 	}
 	
 	/** Test setting an element in the list */
 	@Test
 	public void testSet() {
 	    // TODO: implement this test
-	    
+	    longerList.set(99, 888);
+        assertEquals("Size: check longerlist's size is correct ", LONG_LIST_LENGTH, longerList.size());
+        assertEquals("Data: check longerlist's data is correct ", new Integer(888), longerList.get(99));
+
+
+        longerList.set(0, 888);
+        assertEquals("Size: check longerlist's size is correct ", LONG_LIST_LENGTH, longerList.size());
+        assertEquals("Data: check longerlist's data is correct ", new Integer(888), longerList.get(0));
+
+
+        longerList.set(LONG_LIST_LENGTH-1, 888);
+        assertEquals("Size: check longerlist's size is correct ", LONG_LIST_LENGTH, longerList.size());
+        assertEquals("Data: check longerlist's data is correct ", new Integer(888), longerList.get(LONG_LIST_LENGTH-1));
 	}
 	
 	

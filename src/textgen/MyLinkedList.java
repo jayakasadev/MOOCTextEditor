@@ -12,7 +12,7 @@ import java.util.AbstractList;
 public class MyLinkedList<E> extends AbstractList<E> {
 	LLNode<E> head;
 	LLNode<E> tail;
-	int size;
+	private int size;
 
 	/** Create a new empty LinkedList */
 	public MyLinkedList() {
@@ -89,6 +89,7 @@ public class MyLinkedList<E> extends AbstractList<E> {
             temp.prev = node;
             prev.next = node;
         }
+        size++;
 	}
 
 	/** Return the size of the list */
