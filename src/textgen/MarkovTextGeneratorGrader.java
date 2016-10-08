@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 
 public class MarkovTextGeneratorGrader {
     private static final int LENGTH = 500;
+    private static String feedback = "";
 
     public static void main(String[] args) {
         try {
@@ -13,7 +14,7 @@ public class MarkovTextGeneratorGrader {
             
             int incorrect = 0;
             int tests = 0;
-            String feedback = "";
+
 
             feedback += "\n** Test 1: Generating text before training...";
             try {
@@ -92,7 +93,10 @@ public class MarkovTextGeneratorGrader {
             f.close();
             return;
         } catch (Exception e) {
-            System.out.println("Error during runtime: " + e);
+            System.out.println("Error during runtime: " + e.getCause());
+        }
+        finally {
+            System.out.println(feedback);
         }
     }
 }
