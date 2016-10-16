@@ -27,8 +27,7 @@ public class AutoCompleteDictionaryTrieTester {
 	 * @throws java.lang.Exception
 	 */
 	@Before
-	public void setUp() throws Exception 
-	{
+	public void setUp() throws Exception {
 		emptyDict = new AutoCompleteDictionaryTrie();
 		smallDict = new AutoCompleteDictionaryTrie();
 		largeDict = new AutoCompleteDictionaryTrie();
@@ -50,8 +49,7 @@ public class AutoCompleteDictionaryTrieTester {
 	/** Test if the size method is working correctly.
 	 */
 	@Test
-	public void testSize()
-	{
+	public void testSize() {
 		assertEquals("Testing size for empty dict", 0, emptyDict.size());
 		assertEquals("Testing size for small dict", 8, smallDict.size());
 		assertEquals("Testing size for large dict", 4438, largeDict.size());
@@ -59,8 +57,7 @@ public class AutoCompleteDictionaryTrieTester {
 	
 	/** Test the isWord method */
 	@Test
-	public void testIsWord()
-	{
+	public void testIsWord() {
 		assertEquals("Testing isWord on empty: Hello", false, emptyDict.isWord("Hello"));
 		assertEquals("Testing isWord on small: Hello", true, smallDict.isWord("Hello"));
 		assertEquals("Testing isWord on large: Hello", true, largeDict.isWord("Hello"));
@@ -86,8 +83,7 @@ public class AutoCompleteDictionaryTrieTester {
 	
 	/** Test the addWord method */
 	@Test
-	public void testAddWord()
-	{
+	public void testAddWord() {
 		
 		
 		assertEquals("Asserting hellow is not in empty dict", false, emptyDict.isWord("hellow"));
@@ -130,8 +126,7 @@ public class AutoCompleteDictionaryTrieTester {
 	}
 	
 	@Test
-	public void testPredictCompletions()
-	{
+	public void testPredictCompletions() {
 		List<String> completions;
 		completions = smallDict.predictCompletions("", 0);
 		assertEquals(0, completions.size());
@@ -159,8 +154,5 @@ public class AutoCompleteDictionaryTrieTester {
 		completions = smallDict.predictCompletions("x", 5);
 		assertEquals(0, completions.size());
 	}
-	
-	
-	
-	
+
 }
