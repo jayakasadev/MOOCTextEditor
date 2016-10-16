@@ -128,10 +128,10 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 		 */
 
         TrieNode temp = root;
-        System.out.println(prefix);
+        //System.out.println("Prefix " + prefix + " " + numCompletions);
         int a = 0;
         for(; a < prefix.length(); a++){
-            System.out.println(temp);
+            //System.out.println("Temp " + temp.getText());
             temp = temp.getChild(prefix.charAt(a));
             if(temp == null){
                 return new ArrayList<>();
@@ -142,19 +142,25 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
         queue.add(temp);
 
         List<String> list = new ArrayList<>();
+        int count = 0;
 
         while(!queue.isEmpty()){
+            if(count == numCompletions){
+                break;
+            }
+
             TrieNode node = queue.poll();
 
             if(isWord(node.getText())){
                 list.add(node.getText());
+                count++;
             }
             for(Character c : node.getValidNextCharacters()){
                 queue.add(node.getChild(c));
             }
         }
 
-        System.out.println(list);
+        //System.out.println(list);
     	 
         return list;
      }
